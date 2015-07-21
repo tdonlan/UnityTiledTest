@@ -31,6 +31,8 @@ public class PlayerControllerScript : MonoBehaviour {
         playerBounds = box2d.bounds;
         playerRect = new Rect(gameObject.transform.position.x + box2d.offset.x, gameObject.transform.position.y
              + box2d.offset.y, box2d.size.x, box2d.size.y);
+
+        tileSceneScript.displayBoundingRect(playerBounds);
     }
 
 
@@ -99,8 +101,6 @@ public class PlayerControllerScript : MonoBehaviour {
 
     private bool checkCollision(Bounds bounds)
     {
-
-        //return false;
         return tileSceneScript.tileMapData.checkCollision(bounds);
     }
 }
