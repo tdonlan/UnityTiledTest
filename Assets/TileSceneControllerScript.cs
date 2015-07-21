@@ -15,6 +15,8 @@ public class TileSceneControllerScript : MonoBehaviour {
     public Text debugText;
     public Text debugText2;
 
+    public GameObject player;
+
     public GameObject spritePrefab;
     public List<GameObject> boundingSpriteList = new List<UnityEngine.GameObject>();
 
@@ -22,10 +24,12 @@ public class TileSceneControllerScript : MonoBehaviour {
 	void Start () {
         setRefs();
         loadTileMapData();
+        setPlayerStart();
 	}
 
     private void setRefs()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         debugText = GameObject.FindGameObjectWithTag("debugText").GetComponent<Text>();
         debugText2 = GameObject.FindGameObjectWithTag("debugText2").GetComponent<Text>();
 
@@ -43,6 +47,11 @@ public class TileSceneControllerScript : MonoBehaviour {
             displayBoundingRect(b);
         }
         setDebugText2(outStr);
+    }
+
+    private void setPlayerStart()
+    {
+        player.transform.position = tileMapData.spawnBounds.center;
     }
     
 	

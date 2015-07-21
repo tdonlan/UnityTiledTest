@@ -8,13 +8,22 @@ namespace Assets
 {
     public class TileMapData
     {
-        public List<Rect> collisionRectList = new List<Rect>();
+       
 
         public List<Bounds> collisionBoundsList = new List<Bounds>();
+        public Bounds spawnBounds;
 
         public TileMapData(GameObject tileMapGameObject)
         {
+            loadSpawn(tileMapGameObject);
             loadCollisionRectListFromPrefab(tileMapGameObject);
+        }
+
+        private void loadSpawn(GameObject tileMapGameObject)
+        {
+            Transform spawnChild = tileMapGameObject.transform.FindChild("spawn");
+            spawnBounds = spawnChild.GetComponentsInChildren<BoxCollider2D>().FirstOrDefault().bounds;
+
         }
 
         private void loadCollisionRectListFromPrefab(GameObject tileMapGameObject)
@@ -25,8 +34,6 @@ namespace Assets
             {
                 collisionBoundsList.Add(box.bounds);
 
-                Rect tempRect = new Rect(box.transform.position.x + box.offset.x, box.transform.position.y + box.offset.y, box.size.x, box.size.y);
-                collisionRectList.Add(tempRect);
             }
 
         }
@@ -43,16 +50,6 @@ namespace Assets
             return false;
         }
 
-        public bool checkCollision(Rect testRec)
-        {
-            foreach (var rect in collisionRectList)
-            {
-                if (rect.Overlaps(testRec))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
+      
     }
 }

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 7/20/2015 10:11:04 PM-->
+<!--Last exported: 7/21/2015 12:04:23 AM-->
 <Tiled2Unity version="0.9.11.2">
   <AssignMaterial mesh="mesh_[00]_[01]" material="evilcastle_A4" sortingLayerName="" sortingOrder="0" />
   <AssignMaterial mesh="mesh_[00]_[00]" material="evilcastle_A2" sortingLayerName="" sortingOrder="0" />
@@ -48,6 +48,11 @@
         <BoxCollider2D width="16" height="400" />
       </GameObject>
       <GameObject name="RectangleObject" x="320" y="-16" rotation="0">
+        <BoxCollider2D width="64" height="64" />
+      </GameObject>
+    </GameObject>
+    <GameObject name="spawn">
+      <GameObject name="RectangleObject" x="32" y="-112" rotation="0">
         <BoxCollider2D width="64" height="64" />
       </GameObject>
     </GameObject>

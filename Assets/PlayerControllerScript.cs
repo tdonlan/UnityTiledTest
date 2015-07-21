@@ -12,6 +12,8 @@ public class PlayerControllerScript : MonoBehaviour {
     private Bounds playerBounds;
 
     private TileSceneControllerScript tileSceneScript;
+
+    private Camera mainCamera;
     
 	// Use this for initialization
 	void Start () {
@@ -22,7 +24,9 @@ public class PlayerControllerScript : MonoBehaviour {
     private void setRefs()
     {
         this.tileSceneScript = GameObject.FindObjectOfType<TileSceneControllerScript>().GetComponent<TileSceneControllerScript>();
+        this.mainCamera = GameObject.FindObjectOfType<Camera>();
 
+       
     }
 
     private void setPlayerRect()
@@ -38,25 +42,30 @@ public class PlayerControllerScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
+        UpdateCamera();
         setPlayerRect();
         tileSceneScript.setDebugText(playerBounds.ToString());
+
+      
 
         float moveY=0.0f;
         float moveX=0.0f;
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             canMove = false;
+          
             moveX = -moveAmt;
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             canMove = false;
+   
             moveX = moveAmt;
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             canMove = false;
+         
             moveY = moveAmt;
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
@@ -64,6 +73,9 @@ public class PlayerControllerScript : MonoBehaviour {
             canMove = false;
             moveY = -moveAmt;
         }
+
+
+
         if(Input.GetKeyUp(KeyCode.LeftArrow)){
             canMove = true;
         }
@@ -79,6 +91,9 @@ public class PlayerControllerScript : MonoBehaviour {
             canMove = true;
         }
 
+       
+            UpdateCamera();
+        
     
         var pos = this.gameObject.transform.position;
 
@@ -90,6 +105,13 @@ public class PlayerControllerScript : MonoBehaviour {
      
        
 	}
+
+    private void UpdateCamera()
+    {
+        var cameraPos = this.mainCamera.transform.position;
+        var newPos = this.transform.position;
+        this.mainCamera.transform.position = new Vector3(Mathf.Lerp(cameraPos.x,newPos.x,.1f),Mathf.Lerp(cameraPos.y,newPos.y,.1f),cameraPos.z);
+    }
 
     private Bounds getNewBounds(Vector3 newPos)
     {
