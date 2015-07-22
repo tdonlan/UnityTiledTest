@@ -46,7 +46,7 @@ public class PlayerControllerScript : MonoBehaviour {
         setPlayerRect();
         tileSceneScript.setDebugText(playerBounds.ToString());
 
-      
+        tileSceneScript.checkPlayerObjectCollision(playerBounds);
 
         float moveY=0.0f;
         float moveX=0.0f;
@@ -102,6 +102,8 @@ public class PlayerControllerScript : MonoBehaviour {
         {
             this.gameObject.transform.position = newPos;
         }
+
+       
      
        
 	}
@@ -123,6 +125,12 @@ public class PlayerControllerScript : MonoBehaviour {
 
     private bool checkCollision(Bounds bounds)
     {
-        return tileSceneScript.tileMapData.checkCollision(bounds);
+        if (tileSceneScript.tileMapData != null)
+        {
+            return tileSceneScript.tileMapData.checkCollision(bounds);
+
+        }
+        return false;
+       
     }
 }

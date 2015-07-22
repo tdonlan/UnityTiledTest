@@ -14,6 +14,7 @@ public class TileSceneControllerScript : MonoBehaviour {
     public string debugTextString;
     public Text debugText;
     public Text debugText2;
+    public Text panelText;
 
     public GameObject player;
 
@@ -32,6 +33,7 @@ public class TileSceneControllerScript : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         debugText = GameObject.FindGameObjectWithTag("debugText").GetComponent<Text>();
         debugText2 = GameObject.FindGameObjectWithTag("debugText2").GetComponent<Text>();
+        panelText = GameObject.FindGameObjectWithTag("PanelText").GetComponent<Text>();
 
         spritePrefab = Resources.Load<GameObject>("SpritePrefab");
     }
@@ -92,6 +94,19 @@ public class TileSceneControllerScript : MonoBehaviour {
             Destroy(b);
         }
         boundingSpriteList.Clear();
+    }
+
+    public void checkPlayerObjectCollision(Bounds playerBounds)
+    {
+        if (tileMapData != null)
+        {
+            string objectStr = tileMapData.checkObjectCollision(playerBounds);
+            if (objectStr != null)
+            {
+                panelText.text = objectStr;
+            }
+        }
+       
     }
 
 
